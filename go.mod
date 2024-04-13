@@ -1,8 +1,12 @@
 go 1.22
 
-module chaose
+module chaos
 
-require github.com/spf13/cobra v1.8.0
+require (
+	github.com/google/uuid v1.6.0
+	github.com/jepsen-io/maelstrom/demo/go v0.0.0-20240408130303-0186f398f965
+	github.com/spf13/cobra v1.8.0
+)
 
 require (
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
