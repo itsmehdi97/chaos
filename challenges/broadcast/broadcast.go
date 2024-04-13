@@ -18,19 +18,28 @@ func (b *Broadcast) onBroadcast(msg maelstrom.Message) error {
 		return err
 	}
 
-	b.seen = append(b.seen, body.Message)
 	go func() {
 		for _, nodeID := range b.neighbors {
-			if nodeID != msg.Src {
+			if nodeID != msg.Src && newMsg(&b.seen, body.Message) {
 				b.node.RPC(nodeID, map[string]any{
 					"type":    "broadcast",
 					"message": body.Message,
 				}, nil)
 			}
 		}
+		b.seen = append(b.seen, body.Message)
 	}()
 
 	return b.node.Reply(msg, map[string]string{
 		"type": "broadcast_ok",
 	})
+}
+
+func newMsg(seen *[]int, i int) bool {
+	for _, item := range *seen {
+		if item == i {
+			return false
+		}
+	}
+	return true
 }
