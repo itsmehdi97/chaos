@@ -4,7 +4,7 @@ Copyright © 2024 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"chaos/echo"
+	"chaos/challenges/echo"
 
 	"github.com/spf13/cobra"
 )
